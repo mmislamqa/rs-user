@@ -1,0 +1,8 @@
+[Unit]
+Description = User Service
+[Service]
+User=roboshop
+ExecStart=/bin/node /home/roboshop/user/server.js
+
+[Install]
+WantedBy=multi-user.target
