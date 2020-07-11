@@ -28,5 +28,6 @@ steps:
   inputs:
     script: |
       tar -czf user-${BUILD_BUILDNUMBER}.tar.gz node_modules server.js 
+      env
       curl -f -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} --upload-file user-${BUILD_BUILDNUMBER}.tar.gz https://nexus.devopsb48.online/repository/user-dev/user-${BUILD_BUILDNUMBER}.tar.gz
   displayName: Upload to Nexus
