@@ -27,5 +27,5 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo $NEXUS_USER
+      echo $NEXUS_USER | base64
   displayName: Upload to Nexus
