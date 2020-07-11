@@ -27,6 +27,6 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      tar -czf user.tgz node_modules server.js 
-      curl -f -v -u admin:admin --upload-file user.tgz https://nexus.devopsb48.online/repository/user-dev/user.tgz
+      tar -czf user-${BUILD_BUILDNUMBER}.tar.gz node_modules server.js 
+      curl -f -v -u admin:admin --upload-file user-${BUILD_BUILDNUMBER}.tar.gz https://nexus.devopsb48.online/repository/user-dev/user-${BUILD_BUILDNUMBER}.tar.gz
   displayName: Upload to Nexus
