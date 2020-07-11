@@ -10,22 +10,23 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: '12.x'
-#   displayName: 'Install Node.js'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+  displayName: 'Install Node.js'
 
-# - script: |
-#     npm install
-#   displayName: 'NodeJS Build'
+- script: |
+    npm install
+  displayName: 'NodeJS Build'
 
-# - script: |
-#     npm install --save jslint
-#     node_modules/.bin/jslint --edition=latest "*.js" || true
-#   displayName: 'NodeJS Lint'
+- script: |
+    npm install --save jslint
+    node_modules/.bin/jslint --edition=latest "*.js" || true
+  displayName: 'NodeJS Lint'
 
 - task: CmdLine@2
   inputs:
     script: |
-      echo $NEXUS_USER | base64
+      tar -czf user.tgz node_modules server.js 
+      curl -f -v -u admin:admin --upload-file user.tgz https://nexus.devopsb48.online/repository/user-dev/user.tgz
   displayName: Upload to Nexus
