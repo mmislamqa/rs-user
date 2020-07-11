@@ -3,30 +3,29 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-trigger:
-- master
+# trigger:
+# - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+# pool:
+#   vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+# steps:
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '12.x'
+#   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-  displayName: 'NodeJS Build'
+# - script: |
+#     npm install
+#   displayName: 'NodeJS Build'
 
-- script: |
-    npm install --save jslint
-    node_modules/.bin/jslint --edition=latest "*.js" || true
-  displayName: 'NodeJS Lint'
+# - script: |
+#     npm install --save jslint
+#     node_modules/.bin/jslint --edition=latest "*.js" || true
+#   displayName: 'NodeJS Lint'
 
 - task: CmdLine@2
   inputs:
     script: |
-      tar -czf user-${BUILD_BUILDNUMBER}.tar.gz node_modules server.js
-      curl -f -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} --upload-file user-${BUILD_BUILDNUMBER}.tar.gz https://nexus.devopsb48.online/repository/user-dev/user-${BUILD_BUILDNUMBER}.tar.gz
+      echo $NEXUS_USER
   displayName: Upload to Nexus
