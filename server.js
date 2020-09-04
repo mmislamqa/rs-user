@@ -282,7 +282,7 @@ function mongoLoop() {
 mongoLoop();
 
 // fire it up!
-const port = process.env.USER_SERVER_PORT || '7007';
+const port = process.env.USER_SERVER_PORT || '8000';
 app.listen(port, () => {
     logger.info('Started on port', port);
 });
